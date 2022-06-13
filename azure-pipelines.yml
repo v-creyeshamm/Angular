@@ -23,5 +23,23 @@ steps:
     npm install
     ng build --configuration=azure
   displayName: 'npm install and build'
+  
+- script: |
+    pwd
 
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
 
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'azure MAIC #1'
+    appType: 'webAppLinux'
+    WebAppName: 'angulartektest'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    RuntimeStack: 'NODE|16-lts'
