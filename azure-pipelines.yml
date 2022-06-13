@@ -35,7 +35,7 @@ steps:
     replaceExistingArchive: true
 
 - script: |
-    ls $(Build.ArtifactStagingDirectory)/
+    ls $(Build.SourcesDirectory)/
 
 - task: AzureRmWebAppDeployment@4
   enabled: true
