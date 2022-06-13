@@ -26,7 +26,8 @@ steps:
   
 - script: |
     ls $(pwd)
-    echo $(Agent.BuildDirectory)
+    echo ---
+    ls $(Agent.BuildDirectory)
     
     
 
