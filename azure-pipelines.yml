@@ -24,17 +24,11 @@ steps:
     ng build --configuration=azure
   displayName: 'npm install and build'
   
-- script: |
-    ls $(pwd)
-    echo ---
-    ls $(Build.SourcesDirectory)
-    
-    
 
 - task: ArchiveFiles@2
-  enabled: false
+  enabled: true
   inputs:
-    rootFolderOrFile: '$(Agent.BuildDirectory)/dist/$(variables.app_name)'
+    rootFolderOrFile: '$(Build.SourcesDirectory)/dist/$(variables.app_name)'
     includeRootFolder: true
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
@@ -44,7 +38,7 @@ steps:
     ls $(Build.ArtifactStagingDirectory)/
 
 - task: AzureRmWebAppDeployment@4
-  enabled: false
+  enabled: true
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'azure MAIC #1'
