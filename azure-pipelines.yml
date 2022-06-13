@@ -25,8 +25,9 @@ steps:
   displayName: 'npm install and build'
   
 - script: |
-    echo $(pwd)
+    ls $(pwd)
     echo $(Agent.BuildDirectory)
+    
     
 
 - task: ArchiveFiles@2
