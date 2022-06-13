@@ -6,6 +6,10 @@
 trigger:
 - main
 
+variables:
+- name: app_name
+  value: angular-app
+
 pool:
   vmImage: ubuntu-latest
 
@@ -15,30 +19,33 @@ steps:
     versionSpec: '16.x'
 
 - script: |
-    npm install -g @angular/cli
+    npm install --location=global @angular/cli
     npm install
     ng build --configuration=azure
   displayName: 'npm install and build'
   
 - script: |
     pwd
-    ls $(pwd)
+    ls $(Agent.BuildDirectory)/dist/$({variables.app_name})
 
 - task: ArchiveFiles@2
-  enabled: false
+  enabled: true
   inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    rootFolderOrFile: '$(Agent.BuildDirectory)/dist/$({variables.app_name})'
     includeRootFolder: true
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     replaceExistingArchive: true
 
+- script: |
+    ls $(Build.ArtifactStagingDirectory)/
+
 - task: AzureRmWebAppDeployment@4
-  enabled: false
+  enabled: true
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'azure MAIC #1'
     appType: 'webAppLinux'
     WebAppName: 'angulartektest'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     RuntimeStack: 'NODE|16-lts'
