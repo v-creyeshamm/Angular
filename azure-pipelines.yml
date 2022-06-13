@@ -25,7 +25,8 @@ steps:
   displayName: 'npm install and build'
   
 - script: |
-    pwd
+    echo $(pwd)
+    echo $(Agent.BuildDirectory)
     ls $(Agent.BuildDirectory)/dist/$(variables.app_name)
 
 - task: ArchiveFiles@2
