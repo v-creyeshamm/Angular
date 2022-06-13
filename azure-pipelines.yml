@@ -27,10 +27,10 @@ steps:
 - script: |
     echo $(pwd)
     echo $(Agent.BuildDirectory)
-    ls $(Agent.BuildDirectory)/dist/$(variables.app_name)
+    
 
 - task: ArchiveFiles@2
-  enabled: true
+  enabled: false
   inputs:
     rootFolderOrFile: '$(Agent.BuildDirectory)/dist/$(variables.app_name)'
     includeRootFolder: true
@@ -42,7 +42,7 @@ steps:
     ls $(Build.ArtifactStagingDirectory)/
 
 - task: AzureRmWebAppDeployment@4
-  enabled: true
+  enabled: false
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'azure MAIC #1'
