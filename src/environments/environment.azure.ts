@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  message: "Default environment (prod)",
+  message: "Default environment (azure)",
 };
