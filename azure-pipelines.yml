@@ -26,12 +26,12 @@ steps:
   
 - script: |
     pwd
-    ls $(Agent.BuildDirectory)/dist/$({variables.app_name})
+    ls $(Agent.BuildDirectory)/dist/$(variables.app_name)
 
 - task: ArchiveFiles@2
   enabled: true
   inputs:
-    rootFolderOrFile: '$(Agent.BuildDirectory)/dist/$({variables.app_name})'
+    rootFolderOrFile: '$(Agent.BuildDirectory)/dist/$(variables.app_name)'
     includeRootFolder: true
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
