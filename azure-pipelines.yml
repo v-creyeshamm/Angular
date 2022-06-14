@@ -26,7 +26,6 @@ steps:
   
 
 - task: ArchiveFiles@2
-  enabled: true
   inputs:
     rootFolderOrFile: '$(Build.SourcesDirectory)/dist/angular-app'
     includeRootFolder: false
@@ -38,8 +37,8 @@ steps:
     sudo apt install unzip
     zipinfo $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
 
+
 - task: AzureRmWebAppDeployment@4
-  enabled: false
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'azure MAIC #1'
