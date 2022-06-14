@@ -28,9 +28,8 @@ steps:
 - task: ArchiveFiles@2
   enabled: true
   inputs:
-    # change "angular-app" to your application name
     rootFolderOrFile: '$(Build.SourcesDirectory)/dist/angular-app'
-    includeRootFolder: true
+    includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     replaceExistingArchive: true
