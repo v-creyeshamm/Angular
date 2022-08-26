@@ -10,8 +10,7 @@ variables:
 - name: app_name
   value: angular-app
 
-pool:
-  vmImage: ubuntu-latest
+pool: NPM Test
 
 steps:
 - task: NodeTool@0
