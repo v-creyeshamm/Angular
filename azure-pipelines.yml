@@ -38,11 +38,3 @@ steps:
     zipinfo $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
 
 
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'azure MAIC #1'
-    appType: 'webAppLinux'
-    WebAppName: 'angulartektest'
-    packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    RuntimeStack: 'NODE|16-lts'
